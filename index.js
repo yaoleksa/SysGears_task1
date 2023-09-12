@@ -74,12 +74,7 @@ form.addEventListener('submit', (event) => {
     } else {
         res = (parseFloat(measure[from.value]) / parseFloat(measure[to.value])) * parseFloat(quantity.value);
     }
-    const transform = {
-        "m": "meter",
-        "ft": "foot",
-        "in": "inch",
-        "cm": "centimeter"
-    }
-    result.value = `${quantity.value} ${transform[from.value]}s is ${res} ${transform[to.value]}s`;
+    
+    result.value = `${quantity.value} ${from.value}s is ${res} ${to.value}s`;
 });
 
