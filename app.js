@@ -23,6 +23,9 @@ const convert = (u, v, c) => {
 }
 
 const server = http.createServer((req, res) => {
+    res.writeHead(200, {
+        'Access-Control-Allow-Origin': '*'
+    });
     if(req.method == 'POST') {
         parse(req, 500).then(data => {
             res.write(JSON.stringify(convert(data.distance.unit, data.distance.value, data.convertTo)), 
@@ -31,14 +34,8 @@ const server = http.createServer((req, res) => {
             });
         });
     }
-    fs.readFile('index.html', function(error, data){
-        if(error){
-            res.writeHead(404)
-            res.write('Error: File not found')
-        }else{
-            res.write(data)
-        }
-        res.end()
+    res.write(JSON.stringify(measure), (err) => {
+        res.end();
     });
 });
 server.listen(port, () => {
