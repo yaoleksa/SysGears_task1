@@ -8,7 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "http":"^0.0.1-security"
+    "http":"^0.0.1-security",
+    "fs":"^0.0.1-security",
+    "http-body-json-parse":"^5.0.0"
   },
   "keywords": [],
   "author": "",
