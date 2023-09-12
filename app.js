@@ -2,11 +2,30 @@ const parse = require('http-body-json-parse');
 const http = require('http');
 const fs = require('fs');
 
+
+// Define measure
+const rawData = fs.readFileSync('./measure.json');
+const measure = JSON.parse(rawData);
+
+// Define convert logic
+const convert = (u, v, c) => {
+    let res;
+    if(measure[u] < measure[c]) {
+        res = (parseFloat(v) * parseFloat(measure[u])) / parseFloat(measure[c]);
+    } else {
+        res = (parseFloat(measure[u]) / parseFloat(measure[c])) * parseFloat(v);
+    }
+    return {
+        "unit": u,
+        "value": res.toFixed(2)
+    }
+}
+
 const server = http.createServer((req, res) => {
     if(req.method == 'POST') {
         parse(req, 500).then(data => {
-            const s = '' + data.num;
-            res.end(JSON.stringify(s));
+            console.log(convert(data.unit, data.value, data.convertTo));
+            res.end("ok");
         });
     }
     fs.readFile('index.html', function(error, data){

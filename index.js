@@ -1,9 +1,10 @@
 // Define default measures
+const fileReader = new FileReader();
 const measure = {
-    "centimeter": 1,
-    "inch": 2.54,
-    "foot": 30.48,
-    "metr": 100,
+    "cm": 1,
+    "in": 2.54,
+    "ft": 30.48,
+    "m": 100,
 }
 
 // Get all required components
@@ -46,10 +47,8 @@ form.addEventListener('submit', (event) => {
     }
     let res;
     if(measure[from.value] < measure[to.value]) {
-        console.log(`to ${measure[to.value]} from ${measure[from.value]}`);
         res = (parseFloat(quantity.value) * parseFloat(measure[from.value])) / parseFloat(measure[to.value]);
     } else {
-        console.log(`to ${measure[to.value]} from ${measure[from.value]}`);
         res = (parseFloat(measure[from.value]) / parseFloat(measure[to.value])) * parseFloat(quantity.value);
     }
     result.value = `${quantity.value} ${from.value}s is ${res} ${to.value}s`;
