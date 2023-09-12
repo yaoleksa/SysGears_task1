@@ -24,7 +24,7 @@ const convert = (u, v, c) => {
 const server = http.createServer((req, res) => {
     if(req.method == 'POST') {
         parse(req, 500).then(data => {
-            console.log(convert(data.unit, data.value, data.convertTo));
+            console.log(convert(data.distance.unit, data.distance.value, data.convertTo));
             res.end("ok");
         });
     }
