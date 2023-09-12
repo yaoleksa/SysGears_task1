@@ -25,7 +25,10 @@ const convert = (u, v, c) => {
 const server = http.createServer((req, res) => {
     if(req.method == 'POST') {
         parse(req, 500).then(data => {
-            res.end(JSON.stringify(convert(data.distance.unit, data.distance.value, data.convertTo)));
+            res.write(JSON.stringify(convert(data.distance.unit, data.distance.value, data.convertTo)), 
+            (err) => {
+                res.end();
+            });
         });
     }
     fs.readFile('index.html', function(error, data){
