@@ -1,0 +1,42 @@
+<!doctype html>
+<html dir="ltr" lang="uk">
+  <head>
+    <meta charset="utf-8">
+    <title>Сonvector</title>
+    <link rel="stylesheet" href="./index.css">
+  </head>
+  <body>
+    <form id="form">
+        <div id="input_measure">
+            <label for="input_unit">Convert from:</label>
+            <select class="default_choice" id="input_unit">
+                <option disabled selected>Choose...</option>
+                <option value="metr" id="metr_input" class="not_default">metrs</option>
+                <option value="centimeter" id="centimeter_input" class="not_default">centimeters</option>
+                <option value="inch" id="inch_input" class="not_default">inchs</option>
+                <option value="foot" id="foot_input" class="not_default">foots</option>
+            </select>
+        </div>
+        <div id="output_measure">
+            <label for="output_unit">Convert to:</label>
+            <select class="default_choice" id="output_unit">
+                <option disabled selected>Choose...</option>
+                <option value="metr" id="metr_output" class="not_default">metrs</option>
+                <option value="centimeter" id="centimeter_output" class="not_default">centimeters</option>
+                <option value="inch" id="inch_output" class="not_default">inchs</option>
+                <option value="foot" id="foot_output" class="not_default">foots</option>
+            </select>
+        </div>
+        <div>
+          <input id="input_quantity" type="number">
+        </div>
+        <div id="submit_button">
+          <input id="submit" type="submit" value="CONVERT">
+        </div>
+        <div id="output_result">
+          <output id="result" for="input_unit output_unit"></output>
+        </div>
+    </form>
+  </body>
+  <script defer src="./index.js"></script>
+</html>
