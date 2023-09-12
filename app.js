@@ -1,6 +1,7 @@
 const parse = require('http-body-json-parse');
 const http = require('http');
 const fs = require('fs');
+const port = process.env.PORT || 5000;
 
 
 // Define measure
@@ -37,6 +38,6 @@ const server = http.createServer((req, res) => {
         res.end()
     });
 });
-server.listen(3000, () => {
-    console.log(`http://localhost:${3000}`);
+server.listen(port, () => {
+    console.log(`http://localhost:${port}`);
 });
