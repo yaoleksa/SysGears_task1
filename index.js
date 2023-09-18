@@ -68,13 +68,18 @@ form.addEventListener('submit', (event) => {
     if(!quantity.value) {
         alert('Input quantity first');
     }
-    let res;
-    if(measure[from.value] < measure[to.value]) {
-        res = (parseFloat(quantity.value) * parseFloat(measure[from.value])) / parseFloat(measure[to.value]);
-    } else {
-        res = (parseFloat(measure[from.value]) / parseFloat(measure[to.value])) * parseFloat(quantity.value);
-    }
-    
-    result.value = `${quantity.value} ${from.value}s is ${res} ${to.value}s`;
-});
 
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://length-converter-jyqm.onrender.com");
+    xhr.send(`{
+        "distance": {
+            "unit": "${from.value}",
+            "value": "${quantity.value}"
+        },
+        "convertTo": "${to.value}"
+    }`);
+    xhr.onload = () => {
+        const responseData = JSON.parse(xhr.responseText);
+        result.value = `${responseData.unit}s is ${responseData.value} ${to.value}s`;
+    }
+});

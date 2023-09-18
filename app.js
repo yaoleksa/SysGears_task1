@@ -1,4 +1,4 @@
-const parse = require('http-body-json-parse');
+// Got required packages
 const http = require('http');
 const fs = require('fs');
 const port = process.env.PORT || 5000;
@@ -27,16 +27,19 @@ const server = http.createServer((req, res) => {
         'Access-Control-Allow-Origin': '*'
     });
     if(req.method == 'POST') {
-        parse(req, 500).then(data => {
-            res.write(JSON.stringify(convert(data.distance.unit, data.distance.value, data.convertTo)), 
-            (err) => {
-                res.end();
-            });
+        req.on('data', data => {
+            const decodeData = decodeURIComponent(Buffer.from(data).toString('utf8'));
+            const parsedData = JSON.parse(decodeData);
+            res.end(JSON.stringify(
+                convert(parsedData.distance.unit, parsedData.distance.value, 
+                    parsedData.convertTo)));
         });
     }
-    res.write(JSON.stringify(measure), (err) => {
-        res.end();
-    });
+    if(req.method == 'GET') {
+        res.write(JSON.stringify(measure), (err) => {
+            res.end();
+        });
+    }
 });
 server.listen(port, () => {
     console.log(`http://localhost:${port}`);
